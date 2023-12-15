@@ -3,7 +3,7 @@
  * SDK version: 5.5.0
  * CLI version: 2.13.0
  * 
- * Generated: Fri, 15 Dec 2023 23:23:25 GMT
+ * Generated: Fri, 15 Dec 2023 23:28:53 GMT
  */
 
 var APP_com_domain_app_ottdemoapplng = (function () {
@@ -9060,7 +9060,7 @@ once:   once$1,
           const data = await response.json();
           const cards = data.results.map((poster, idx) => ({
             type: PosterComponent,
-            posterUrl: "http://image.tmdb.org/t/p/w780".concat(poster.backdrop_path),
+            posterUrl: "http://image.tmdb.org/t/p/w1280_and_h720_multi_faces".concat(poster.backdrop_path),
             posterTitle: poster.title,
             posterDesc: poster.overview,
             posterID: poster.id,
