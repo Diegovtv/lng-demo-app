@@ -3,7 +3,7 @@
  * SDK version: 5.5.0
  * CLI version: 2.13.0
  * 
- * Generated: Fri, 15 Dec 2023 14:24:17 GMT
+ * Generated: Fri, 15 Dec 2023 23:23:25 GMT
  */
 
 var APP_com_domain_app_ottdemoapplng = (function () {
@@ -8828,8 +8828,9 @@ once:   once$1,
           rect: true,
           w: 1920,
           h: 1080,
-          colorTop: 0xff7CB9E8,
-          colorBottom: 0xff2a52be
+          color: 0xFF000000
+          // colorTop: 0xff7CB9E8,
+          // colorBottom: 0xff2a52be,
           // In any case of background, uncomment this and put a custom background
           // src: Utils.asset('images/background.png'),
         }
@@ -8845,7 +8846,7 @@ once:   once$1,
           rect: true,
           w: 1920,
           h: 100,
-          color: 0xff89CFF0,
+          color: 0xFF43c48b,
           Title: {
             x: 960,
             y: 50,
@@ -8874,7 +8875,14 @@ once:   once$1,
           y: 0,
           x: 0,
           rect: true,
-          color: 0xFF292522,
+          color: 0xFF000000,
+          Logo: {
+            y: 50,
+            x: 50,
+            w: 200,
+            h: 60,
+            src: Utils.asset('images/logo-green.png')
+          },
           Title: {
             x: 150,
             y: 250,
@@ -8884,7 +8892,7 @@ once:   once$1,
               text: 'Categories',
               fontFace: 'Bold',
               textAlign: 'center',
-              textColor: '0xFFFFFFFF',
+              textColor: '0xFFFAFAFA',
               fontSize: 32
             }
           },
@@ -8900,7 +8908,8 @@ once:   once$1,
               fixed: true,
               w: 250,
               h: 50,
-              title: "NEW"
+              title: "NEW",
+              color: 0xFF24BD7E
             }, {
               type: Pt,
               y: 0,
@@ -8937,40 +8946,52 @@ once:   once$1,
     static _template() {
       return {
         rect: true,
-        color: 0xFF292522,
-        w: 220,
-        h: 80,
-        x: 250,
-        y: 165,
+        color: 0xFF13885b,
+        w: 500,
+        h: 350,
+        x: 0,
+        y: 0,
         Poster: {
           assetId: 0,
-          w: 220,
-          h: 330,
-          x: 110,
-          y: -165,
+          w: 500,
+          h: 250,
+          x: 250,
+          y: 125,
           mountX: 0.5,
           mountY: 0.5,
           color: 0xFF858585,
-          src: "https://image.tmdb.org/t/p/w220_and_h330_face/sERwJxz0sqsbcUoTm66l9pI6HcH.jpg"
+          texture: {
+            resizeMode: {
+              type: 'contain',
+              w: 500,
+              h: 250,
+              clipY: 0
+            },
+            type: lng.textures.ImageTexture,
+            src: "https://image.tmdb.org/t/p/w220_and_h330_face/sERwJxz0sqsbcUoTm66l9pI6HcH.jpg"
+          }
         },
         PosterTitle: {
-          y: 5,
-          x: 50,
+          y: 280,
+          x: 0,
           text: {
-            w: 200,
+            w: 500,
             text: "Poster title2Poster title2Poster title2Poster title",
             fontSize: 24,
             fontFace: 'Bold',
-            maxLines: 2
+            maxLines: 2,
+            textAlign: 'center'
           }
         },
         PosterReleaseDate: {
-          y: 55,
-          x: 65,
+          y: 255,
+          x: 0,
           text: {
+            w: 500,
             text: "2023-12-14",
-            fontSize: 18,
-            fontFace: 'Bold'
+            fontSize: 22,
+            fontFace: 'Bold',
+            textAlign: 'center'
           }
         }
       };
@@ -8985,7 +9006,7 @@ once:   once$1,
     }
     _focus() {
       this.patch({
-        color: 0xFFe6324b
+        color: 0xFF24BD7E
       });
       this.tag("Poster").patch({
         color: 0xFFFFFFFF
@@ -8993,7 +9014,7 @@ once:   once$1,
     }
     _unfocus() {
       this.patch({
-        color: 0xFF292522
+        color: 0xFF13885b
       });
       this.tag("Poster").patch({
         color: 0xFF858585
@@ -9039,7 +9060,7 @@ once:   once$1,
           const data = await response.json();
           const cards = data.results.map((poster, idx) => ({
             type: PosterComponent,
-            posterUrl: "https://image.tmdb.org/t/p/w220_and_h330_face".concat(poster.poster_path),
+            posterUrl: "http://image.tmdb.org/t/p/w780".concat(poster.backdrop_path),
             posterTitle: poster.title,
             posterDesc: poster.overview,
             posterID: poster.id,
@@ -9057,44 +9078,50 @@ once:   once$1,
     }
   };
   class Home extends t.Component {
-    static getFonts() {
-      return [{
-        family: 'Regular',
-        url: Utils.asset('fonts/Satoshi-Regular.ttf')
-      }, {
-        family: 'Medium',
-        url: Utils.asset('fonts/Satoshi-Medium.ttf')
-      }, {
-        family: 'MediumItalic',
-        url: Utils.asset('fonts/Satoshi-MediumItalic.ttf')
-      }, {
-        family: 'Bold',
-        url: Utils.asset('fonts/Satoshi-Bold.ttf')
-      }, {
-        family: 'BoldItalic',
-        url: Utils.asset('fonts/Satoshi-BoldItalic.ttf')
-      }, {
-        family: 'Italic',
-        url: Utils.asset('fonts/Satoshi-Italic.ttf')
-      }, {
-        family: 'Black',
-        url: Utils.asset('fonts/Satoshi-Black.ttf')
-      }, {
-        family: 'BlackItalic',
-        url: Utils.asset('fonts/Satoshi-BlackItalic.ttf')
-      }, {
-        family: 'Light',
-        url: Utils.asset('fonts/Satoshi-Light.ttf')
-      }, {
-        family: 'LightItalic',
-        url: Utils.asset('fonts/Satoshi-LightItalic.ttf')
-      }];
-    }
     static _template() {
       return {
         //Background
         Background: {
           type: BackgroundComponent
+        },
+        //SuperContainer
+        ContainerInstance: {
+          type: me,
+          h: 1080,
+          w: 1920,
+          y: 300,
+          x: 350,
+          alwaysScroll: true,
+          wrapSelected: true,
+          items: [{
+            type: ft,
+            h: 350,
+            items: [],
+            alwaysScroll: true
+          }, {
+            type: ft,
+            h: 350,
+            items: [],
+            alwaysScroll: true
+          }, {
+            type: ft,
+            h: 350,
+            items: [],
+            alwaysScroll: true
+          }, {
+            type: ft,
+            h: 350,
+            items: [],
+            alwaysScroll: true
+          }]
+        },
+        //Black box wrapping the header and text, also ensures that when the row goes up does the appareance that hides
+        TextWrapper: {
+          rect: true,
+          w: 1920,
+          h: 300,
+          x: 0,
+          color: 0xFF000000
         },
         //Header
         Header: {
@@ -9105,7 +9132,7 @@ once:   once$1,
           y: 120,
           text: {
             fontSize: 24,
-            text: "Welcome, user.",
+            text: "Welcome, user",
             color: 0xff0000,
             fontFace: 'Bold'
           }
@@ -9152,49 +9179,6 @@ once:   once$1,
         //Menu Container
         MenuInstance: {
           type: MenuComponent
-        },
-        //SuperContainer
-        ContainerInstance: {
-          type: me,
-          h: 1080,
-          w: 1920,
-          y: 600,
-          x: 350,
-          alwaysScroll: true,
-          wrapSelected: true,
-          items: [{
-            type: ft,
-            h: 550,
-            y: 500,
-            x: 75,
-            items: [],
-            alwaysScroll: true
-            // wrapSelected: true,
-          }, {
-            type: ft,
-            h: 550,
-            y: 600,
-            x: 75,
-            items: [],
-            alwaysScroll: true
-            // wrapSelected: true,
-          }, {
-            type: ft,
-            h: 550,
-            y: 300,
-            x: 75,
-            items: [],
-            alwaysScroll: true
-            // wrapSelected: true,
-          }, {
-            type: ft,
-            h: 550,
-            y: 300,
-            x: 75,
-            items: [],
-            alwaysScroll: true
-            // wrapSelected: true,
-          }]
         }
       };
     }
@@ -9304,8 +9288,9 @@ once:   once$1,
           w: 1920,
           h: 1080,
           y: 400,
-          colorTop: 0xff7CB9E8,
-          colorBottom: 0xff2a52be
+          color: 0xFF000000
+          // colorTop: 0xff7CB9E8,
+          // colorBottom: 0xff2a52be,
         },
         Header: {
           type: HeaderComponent
@@ -9316,7 +9301,7 @@ once:   once$1,
           w: 1920,
           h: 100,
           y: 400,
-          color: 0xff89CFF0,
+          color: 0xFF24BD7E,
           ATitle: {
             y: 25,
             x: 550,
@@ -9371,7 +9356,7 @@ once:   once$1,
           h: 430,
           y: 230,
           x: 200,
-          src: "https://image.tmdb.org/t/p/w220_and_h330_face/sERwJxz0sqsbcUoTm66l9pI6HcH.jpg"
+          src: "https://image.tmdb.org/t/p/w500/sERwJxz0sqsbcUoTm66l9pI6HcH.jpg"
         }
       };
     }
@@ -9417,7 +9402,7 @@ once:   once$1,
           }
         });
         this.tag("AssetPoster").patch({
-          src: "https://image.tmdb.org/t/p/w220_and_h330_face".concat(assetData.poster_path)
+          src: "https://image.tmdb.org/t/p/w500/".concat(assetData.poster_path)
         });
         this.tag("AssetPoster").patch({
           assetId: assetData.id
@@ -9460,34 +9445,36 @@ once:   once$1,
   class Player extends t.Component {
     static _template() {
       return {
-        // PlayerBtns: {
-        //     x: 500,
-        //     y: 500,
-        //     type: Row,
-        //     items: [
-        //         {
-        //             type: Button,
-        //             title: "-S",
-        //             fixed: true,
-        //             w: 150,
-        //             h: 50,
-        //         },
-        //         {
-        //             type: Button,
-        //             title: "P",
-        //             fixed: true,
-        //             w: 150,
-        //             h: 50,
-        //         },
-        //         {
-        //             type: Button,
-        //             title: "+S",
-        //             fixed: true,
-        //             w: 150,
-        //             h: 50,
-        //         },
-        //     ]
-        // }
+        SkipBBtn: {
+          type: Me,
+          x: 650,
+          y: 900,
+          fixed: true,
+          size: "sm",
+          w: 150,
+          h: 150,
+          icon: Utils.asset("images/icons_player/back-gray.svg")
+        },
+        PlayPauseBtn: {
+          type: Me,
+          x: 850,
+          y: 900,
+          fixed: true,
+          size: "sm",
+          w: 150,
+          h: 150,
+          icon: Utils.asset("images/icons_player/play-gray.svg")
+        },
+        SkipFBtn: {
+          type: Me,
+          x: 1050,
+          y: 900,
+          fixed: true,
+          size: "sm",
+          w: 150,
+          h: 150,
+          icon: Utils.asset("images/icons_player/forward-gray.svg")
+        }
       };
     }
     _firstActive() {
@@ -9496,18 +9483,87 @@ once:   once$1,
       VideoPlayer.show();
       VideoPlayer.open(videoUrl);
       VideoPlayer.play(videoUrl);
+      this._setState("PlayPauseBtn");
     }
-    _getFocused() {
-      return this.tag("PlayerBtns");
-    }
-    _handleLeft() {
-      VideoPlayer.skip(-20);
-    }
-    _handleEnter() {
-      VideoPlayer.playPause();
-    }
-    _handleRight() {
-      VideoPlayer.skip(20);
+
+    // _getFocused() {
+    //     return this.tag("PlayPauseBtn")
+    // } 
+
+    static _states() {
+      return [class SkipBBtn extends this {
+        _getFocused() {
+          return this.tag("SkipBBtn");
+        }
+        _handleEnter() {
+          VideoPlayer.skip(-20);
+        }
+        _handleRight() {
+          this._setState("PlayPauseBtn");
+        }
+        _focus() {
+          this.tag("SkipBBtn").patch({
+            icon: Utils.asset("images/icons_player/back-black.svg")
+          });
+        }
+        _unfocus() {
+          this.tag("SkipBBtn").patch({
+            icon: Utils.asset("images/icons_player/back-gray.svg")
+          });
+        }
+      }, class PlayPauseBtn extends this {
+        _getFocused() {
+          return this.tag("PlayPauseBtn");
+        }
+        _handleLeft() {
+          this._setState("SkipBBtn");
+        }
+        _handleEnter() {
+          if (VideoPlayer.playing) {
+            this.tag("PlayPauseBtn").patch({
+              icon: Utils.asset("images/icons_player/play-gray.svg")
+            });
+          } else {
+            this.tag("PlayPauseBtn").patch({
+              icon: Utils.asset("images/icons_player/pause-gray.svg")
+            });
+          }
+          VideoPlayer.playPause();
+        }
+        _handleRight() {
+          this._setState("SkipFBtn");
+        }
+        _focus() {
+          this.tag("PlayPauseBtn").patch({
+            icon: Utils.asset("images/icons_player/play-gray.svg")
+          });
+        }
+        _unfocus() {
+          this.tag("PlayPauseBtn").patch({
+            icon: Utils.asset("images/icons_player/play-gray.svg")
+          });
+        }
+      }, class SkipFBtn extends this {
+        _getFocused() {
+          return this.tag("SkipFBtn");
+        }
+        _handleLeft() {
+          this._setState("PlayPauseBtn");
+        }
+        _handleEnter() {
+          VideoPlayer.skip(20);
+        }
+        _focus() {
+          this.tag("SkipFBtn").patch({
+            icon: Utils.asset("images/icons_player/forward-black.svg")
+          });
+        }
+        _unfocus() {
+          this.tag("SkipFBtn").patch({
+            icon: Utils.asset("images/icons_player/forward-gray.svg")
+          });
+        }
+      }];
     }
     _handleBack() {
       VideoPlayer.reload();
@@ -9545,34 +9601,10 @@ once:   once$1,
     static getFonts() {
       return [{
         family: 'Regular',
-        url: Utils.asset('fonts/Satoshi-Regular.ttf')
-      }, {
-        family: 'Medium',
-        url: Utils.asset('fonts/Satoshi-Medium.ttf')
-      }, {
-        family: 'MediumItalic',
-        url: Utils.asset('fonts/Satoshi-MediumItalic.ttf')
+        url: Utils.asset('fonts/Arial.ttf')
       }, {
         family: 'Bold',
-        url: Utils.asset('fonts/Satoshi-Bold.ttf')
-      }, {
-        family: 'BoldItalic',
-        url: Utils.asset('fonts/Satoshi-BoldItalic.ttf')
-      }, {
-        family: 'Italic',
-        url: Utils.asset('fonts/Satoshi-Italic.ttf')
-      }, {
-        family: 'Black',
-        url: Utils.asset('fonts/Satoshi-Black.ttf')
-      }, {
-        family: 'BlackItalic',
-        url: Utils.asset('fonts/Satoshi-BlackItalic.ttf')
-      }, {
-        family: 'Light',
-        url: Utils.asset('fonts/Satoshi-Light.ttf')
-      }, {
-        family: 'LightItalic',
-        url: Utils.asset('fonts/Satoshi-LightItalic.ttf')
+        url: Utils.asset('fonts/Arial-Bold.ttf')
       }];
     }
     _setup() {
