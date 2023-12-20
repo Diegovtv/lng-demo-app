@@ -3,7 +3,7 @@
  * SDK version: 5.5.0
  * CLI version: 2.13.0
  * 
- * Generated: Fri, 15 Dec 2023 23:30:33 GMT
+ * Generated: Wed, 20 Dec 2023 18:41:49 GMT
  */
 
 var APP_com_domain_app_ottdemoapplng = (function () {
@@ -8901,12 +8901,12 @@ once:   once$1,
             h: 1080,
             w: 50,
             y: 300,
-            x: 25,
+            x: 50,
             items: [{
               type: Pt,
               y: 0,
               fixed: true,
-              w: 250,
+              w: 200,
               h: 50,
               title: "NEW",
               color: 0xFF24BD7E
@@ -8914,21 +8914,21 @@ once:   once$1,
               type: Pt,
               y: 0,
               fixed: true,
-              w: 250,
+              w: 200,
               h: 50,
               title: "POPULAR"
             }, {
               type: Pt,
               y: 0,
               fixed: true,
-              w: 250,
+              w: 200,
               h: 50,
               title: "VOTES"
             }, {
               type: Pt,
               y: 0,
               fixed: true,
-              w: 250,
+              w: 200,
               h: 50,
               title: "REVENUE"
             }]
@@ -9262,7 +9262,7 @@ once:   once$1,
       }];
     }
     pageTransition() {
-      return "fade";
+      return 'down';
     }
   }
 
@@ -9365,13 +9365,13 @@ once:   once$1,
     }
     _init() {}
     _handleBack() {
-      Router.navigate("home");
+      Router.back();
     }
     _handleEnter() {
       Router.navigate("movie/details/play/".concat(this.tag("AssetPoster").assetId));
     }
     pageTransition() {
-      return "fade";
+      return "up";
     }
     _onUrlParams(args) {
       const assetResult = new Promise(async (resolve, reject) => {
@@ -9571,10 +9571,10 @@ once:   once$1,
         VideoPlayer.pause();
       }, 100);
       VideoPlayer.hide();
-      Router.navigate("movie/details/".concat(this.assetID));
+      Router.back();
     }
     pageTransition() {
-      return "fade";
+      return "up";
     }
     _onUrlParams(args) {
       this.assetID = args.assetId;
