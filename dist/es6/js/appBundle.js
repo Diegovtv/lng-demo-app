@@ -3,7 +3,7 @@
  * SDK version: 5.5.0
  * CLI version: 2.13.0
  * 
- * Generated: Wed, 20 Dec 2023 18:41:49 GMT
+ * Generated: Thu, 18 Jan 2024 18:29:02 GMT
  */
 
 var APP_com_domain_app_ottdemoapplng = (function () {
@@ -8948,35 +8948,41 @@ once:   once$1,
         rect: true,
         color: 0xFF13885b,
         w: 500,
-        h: 350,
+        h: 370,
         x: 0,
         y: 0,
+        PlaceholderImg: {
+          w: 500,
+          h: 282,
+          x: 250,
+          y: 125,
+          rect: true,
+          color: 0xFF858585,
+          mountX: 0.5,
+          mountY: 0.5
+        },
         Poster: {
           assetId: 0,
           w: 500,
-          h: 250,
+          h: 282,
           x: 250,
           y: 125,
           mountX: 0.5,
           mountY: 0.5,
           color: 0xFF858585,
           texture: {
-            resizeMode: {
-              type: 'contain',
-              w: 500,
-              h: 250,
-              clipY: 0
-            },
+            w: 500,
+            h: 282,
             type: lng.textures.ImageTexture,
             src: "https://image.tmdb.org/t/p/w220_and_h330_face/sERwJxz0sqsbcUoTm66l9pI6HcH.jpg"
           }
         },
         PosterTitle: {
-          y: 280,
+          y: 300,
           x: 0,
           text: {
             w: 500,
-            text: "Poster title2Poster title2Poster title2Poster title",
+            text: "Poster title",
             fontSize: 24,
             fontFace: 'Bold',
             maxLines: 2,
@@ -8984,7 +8990,7 @@ once:   once$1,
           }
         },
         PosterReleaseDate: {
-          y: 255,
+          y: 275,
           x: 0,
           text: {
             w: 500,
@@ -9095,22 +9101,22 @@ once:   once$1,
           wrapSelected: true,
           items: [{
             type: ft,
-            h: 350,
+            h: 390,
             items: [],
             alwaysScroll: true
           }, {
             type: ft,
-            h: 350,
+            h: 390,
             items: [],
             alwaysScroll: true
           }, {
             type: ft,
-            h: 350,
+            h: 390,
             items: [],
             alwaysScroll: true
           }, {
             type: ft,
-            h: 350,
+            h: 390,
             items: [],
             alwaysScroll: true
           }]
@@ -9463,7 +9469,7 @@ once:   once$1,
           size: "sm",
           w: 150,
           h: 150,
-          icon: Utils.asset("images/icons_player/play-gray.svg")
+          icon: Utils.asset("images/icons_player/pause-gray.svg")
         },
         SkipFBtn: {
           type: Me,
@@ -9478,7 +9484,7 @@ once:   once$1,
       };
     }
     _firstActive() {
-      const videoUrl = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+      const videoUrl = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4';
       VideoPlayer.consumer(this);
       VideoPlayer.show();
       VideoPlayer.open(videoUrl);
@@ -9535,12 +9541,12 @@ once:   once$1,
         }
         _focus() {
           this.tag("PlayPauseBtn").patch({
-            icon: Utils.asset("images/icons_player/play-gray.svg")
+            icon: Utils.asset("images/icons_player/pause-gray.svg")
           });
         }
         _unfocus() {
           this.tag("PlayPauseBtn").patch({
-            icon: Utils.asset("images/icons_player/play-gray.svg")
+            icon: Utils.asset("images/icons_player/pause-gray.svg")
           });
         }
       }, class SkipFBtn extends this {
@@ -9620,22 +9626,6 @@ once:   once$1,
         }
       };
     }
-
-    // static _states() {
-    //   const states = super._states();
-    //   states.push(
-    //     class ExampleState extends this{
-    //       $enter() {
-
-    //       }
-    //       $exit() {
-
-    //       }
-    //     }
-    //   );
-    //   return states;
-    // }
-
     _handleAppClose() {
       this.application.closeApp();
     }
