@@ -3,7 +3,7 @@
  * SDK version: 5.5.0
  * CLI version: 2.13.0
  * 
- * Generated: Mon, 29 Jan 2024 13:45:06 GMT
+ * Generated: Tue, 30 Jan 2024 19:23:36 GMT
  */
 
 var APP_com_domain_app_ottdemoapplng = (function () {
@@ -9624,40 +9624,99 @@ once:   once$1,
     return typeof key === "symbol" ? key : String(key);
   }
 
+  // const videoPlayer = document.getElementById("video-player")
+  // console.log(videoPlayer)
+
+  // videoPlayer.addEventListener('timeupdate', () => {
+  //     // You can use this event to track the progress of the video.
+  //     // It is fired regularly as the video is playing.
+  //     console.log('Current time:', videoPlayer.currentTime);
+  //   });
+
   class Player extends t.Component {
     static _template() {
       return {
         SkipBBtn: {
           type: De,
-          x: 650,
+          mountX: 0.5,
+          x: 810,
           y: 900,
           fixed: true,
           size: "sm",
-          w: 150,
-          h: 150,
+          w: 100,
+          h: 100,
           icon: Utils.asset("images/icons_player/back-gray.svg")
         },
         PlayPauseBtn: {
           type: De,
-          x: 850,
+          mountX: 0.5,
+          x: 960,
           y: 900,
           fixed: true,
           size: "sm",
-          w: 150,
-          h: 150,
+          w: 100,
+          h: 100,
           icon: Utils.asset("images/icons_player/pause-gray.svg")
         },
         SkipFBtn: {
           type: De,
-          x: 1050,
+          mountX: 0.5,
+          x: 1110,
           y: 900,
           fixed: true,
           size: "sm",
-          w: 150,
-          h: 150,
+          w: 100,
+          h: 100,
           icon: Utils.asset("images/icons_player/forward-gray.svg")
+        },
+        Spinner: {
+          src: Utils.asset("images/spinner.png"),
+          mountX: 0.5,
+          mountY: 0.5,
+          x: 960,
+          y: 540,
+          w: 100,
+          h: 100,
+          alpha: 0.001,
+          color: 0xaaffffff,
+          transitions: {
+            alpha: {
+              duration: 1,
+              timingFunction: "cubic-bezier(0.20, 1.00, 0.80, 1.00)"
+            }
+          }
         }
       };
+    }
+    _init() {
+      this._spinnerAnimation = this.animation({
+        duration: 1,
+        repeat: -1,
+        actions: [{
+          t: "Spinner",
+          p: "rotation",
+          sm: 0,
+          v: function (t) {
+            if (t < 0.125) {
+              return 45 * (Math.PI / 180);
+            } else if (t < 0.25) {
+              return 90 * (Math.PI / 180);
+            } else if (t < 0.375) {
+              return 135 * (Math.PI / 180);
+            } else if (t < 0.5) {
+              return 180 * (Math.PI / 180);
+            } else if (t < 0.625) {
+              return 225 * (Math.PI / 180);
+            } else if (t < 0.75) {
+              return 270 * (Math.PI / 180);
+            } else if (t < 0.875) {
+              return 315 * (Math.PI / 180);
+            } else if (t < 1) {
+              return 360 * (Math.PI / 180);
+            }
+          }
+        }]
+      });
     }
     _firstActive() {
       const videoUrl = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4';
@@ -9665,13 +9724,23 @@ once:   once$1,
       VideoPlayer.show();
       VideoPlayer.open(videoUrl);
       VideoPlayer.play(videoUrl);
+      const videoPlayer = document.getElementById("video-player");
+      videoPlayer.addEventListener('timeupdate', () => {
+        // You can use this event to track the progress of the video.
+        // It is fired regularly as the video is playing.
+        console.log('Current time:', videoPlayer.currentTime);
+      });
+      videoPlayer.addEventListener("waiting", () => {
+        this.tag("Spinner").setSmooth("alpha", 1);
+        this._spinnerAnimation.start();
+      });
+      videoPlayer.addEventListener("canplay", () => {
+        this.tag("Spinner").setSmooth("alpha", 0);
+        this._spinnerAnimation.stop();
+      });
       this._setState("PlayPauseBtn");
     }
-
-    // _getFocused() {
-    //     return this.tag("PlayPauseBtn")
-    // } 
-
+    _active() {}
     static _states() {
       return [class SkipBBtn extends this {
         _getFocused() {
