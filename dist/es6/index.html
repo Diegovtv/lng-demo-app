@@ -1,49 +1,142 @@
+<!-- This is a template that includes the splash screen (animContainer) on the
+    index.html file so it loads faster (before the app code itself even loads).
+    It's to be used with the "dist" command and is based on the index file
+    produced by LNG itself. -->
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <style>
-            html {height: 100%; width: 100%;}
-            *,body {margin:0; padding:0;}
-            canvas { position: absolute; z-index: 2; }
-            body { width: 100%; height: 100%;}
-        </style>
-    </head>
-    <body>
-        <script src="./js/lightning.min.js"></script>
-        <script src="./js/appBundle.js"></script>
 
-        <script>
-            const appSettings = {
-  "stage": {
-    "clearColor": "0x00000000",
-    "useImageWorker": true
-  },
-  "debug": false,
-  "name": "ottdemoapplng",
-  "identifier": "com.domain.app.ottdemoapplng",
-  "version": "1.0.0",
-  "icon": "./static/icon.png",
-  "id": "com.domain.app.ottdemoapplng"
-}
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
 
-            const platformSettings = {
-  "path": "./static",
-  "log": true,
-  "showVersion": true
-}
+        *,
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-            const appData = {}
+        canvas {
+            position: absolute;
+            z-index: 2;
+        }
 
-            let bundle = window.APP_com_domain_app_ottdemoapplng
-            // support rollup and esbuild
-            if (typeof bundle !== 'function') {
-              bundle = bundle.default
-            }
+        body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
 
-            const app = bundle(appSettings, platformSettings, appData)
-            document.body.appendChild(app.stage.getCanvas())
+<body>
+    <script>
+        function loadJsSrc(scriptSrc) {
+            return new Promise(function (resolve) {
+                var script = document.createElement('script')
+                script.type = 'text/javascript'
+                script.src = scriptSrc
+                script.onload = function () { resolve() }
+                document.body.appendChild(script)
+            })
+        }
 
-        </script>
-    </body>
+        function lngSetup() {
+            Promise.all([
+                loadJsSrc("./js/polyfills.js"),
+                loadJsSrc("./js/lightning.es5.min.js"),
+            ])
+                .then(function () {
+                    return loadJsSrc("./js/appBundle.es5.js")
+                }).then(function () {
+                    var appSettings = {
+                        "stage": {
+                            "w": 1920,
+                            "h": 1080,
+                            "precision": 1,
+                            "clearColor": "0x00000000",
+                            "useImageWorker": true
+                        },
+                        "debug": false,
+                        "name": "core-app-sample",
+                        "identifier": "core-app-sample",
+                        "version": "1.0.0",
+                        "id": "core-app-sample"
+                    }
+
+                    var platformSettings = {
+                        "path": "./static",
+                        "log": true,
+                        "showVersion": false,
+                        "textureMode": false,
+                        "showFps": false,
+                        "esEnv": "es5"
+                    }
+
+                    var appData = {}
+
+                    var bundle = window.APP_core_app_sample;
+
+                    // support rollup and esbuild
+                    if (typeof bundle !== 'function') {
+                        bundle = bundle.default;
+                    }
+
+                    var app = bundle(appSettings, platformSettings, appData)
+                    document.body.appendChild(app.stage.getCanvas())
+                })
+        }
+
+        var animDimensions = {
+            w: 1920,
+            h: 1080,
+        }
+        var zIndex = {
+            background: "20",
+            items: "21"
+        }
+        var position = "absolute"
+        var elementId = "splashgif"
+
+        document.body.bgColor = '#1C203C'
+        // Wallpaper
+        var animContainer = document.createElement('img');
+        animContainer.src = "./static/images/videoWall.jpg";
+        animContainer.id = elementId
+        animContainer.width = animDimensions.w;
+        animContainer.height = animDimensions.h;
+        animContainer.style.zIndex = zIndex.background;
+        animContainer.style.position = position;
+
+        // Logo
+        var velopeLogo = document.createElement('img');
+        velopeLogo.src = "./static/images/logo-green.png"
+        velopeLogo.id = elementId
+        velopeLogo.style.zIndex = zIndex.items;
+        velopeLogo.style.position = position;
+        velopeLogo.style.left = "250px";
+        velopeLogo.style.top = "274px";
+
+        // Spinner
+        var spinnerContainer = document.createElement('img');
+        spinnerContainer.src = "./static/images/spinner2.gif";
+        spinnerContainer.id = elementId
+        spinnerContainer.style.zIndex = zIndex.items;
+        spinnerContainer.style.position = position;
+        spinnerContainer.style.left = "382px";
+        spinnerContainer.style.top = "450px";
+
+        document.body.appendChild(animContainer);
+        document.body.appendChild(velopeLogo);
+        document.body.appendChild(spinnerContainer);
+
+        animContainer.onload = (function () {
+            lngSetup()
+        })
+    </script>
+</body>
+
 </html>
