@@ -1,0 +1,2 @@
+import{r as o,S as t}from"./CoreExtension-C4ghjkTg.js";function u(){import.meta.url,import("_").catch(()=>1),async function*(){}().next()}class s extends o{async run(n){n.fontManager.addFontFace(new t("Ubuntu",{weight:700},"msdf",n,"fonts/Ubuntu-Bold.msdf.png","fonts/Ubuntu-Bold.msdf.json")),n.fontManager.addFontFace(new t("Ubuntu",{weight:400},"msdf",n,"fonts/Ubuntu-Regular.msdf.png","fonts/Ubuntu-Regular.msdf.json"))}}export{u as __vite_legacy_guard,s as default};
+//# sourceMappingURL=AppCoreExtensions-Ne9eQjat.js.map
